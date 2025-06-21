@@ -8,11 +8,8 @@ const OfferCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [offers, setOffers] = useState([]);
-<<<<<<< HEAD
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
   const [progress, setProgress] = useState(0);
-=======
->>>>>>> 401dca85512bef419debcbc2a9310b4fdc9d551f
 
   // Load promotions effect - combines mock data and localStorage promotions
   useEffect(() => {
@@ -63,7 +60,6 @@ const OfferCarousel = () => {
     loadPromotions();
   }, []);
 
-<<<<<<< HEAD
   // Progress bar animation effect
   useEffect(() => {
     if (offers.length <= 1) return;
@@ -99,18 +95,6 @@ const OfferCarousel = () => {
       cancelAnimationFrame(animationFrame);
     };
   }, [currentIndex, isHovered, offers.length]);
-=======
-  // Auto-rotate effect
-  useEffect(() => {
-    if (isHovered || offers.length <= 1) return;
-    
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % offers.length);
-    }, 3000);
-    
-    return () => clearInterval(interval);
-  }, [offers.length, isHovered]);
->>>>>>> 401dca85512bef419debcbc2a9310b4fdc9d551f
 
   // Early return for empty offers
   if (offers.length === 0) {
@@ -125,7 +109,6 @@ const OfferCarousel = () => {
 
   // Navigation functions
   const goToSlide = (index) => {
-<<<<<<< HEAD
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
     setProgress(0);
@@ -156,17 +139,6 @@ const OfferCarousel = () => {
       x: direction > 0 ? '-100%' : '100%',
       opacity: 0
     })
-=======
-    setCurrentIndex(index);
-  };
-
-  const goToPrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? offers.length - 1 : prev - 1));
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % offers.length);
->>>>>>> 401dca85512bef419debcbc2a9310b4fdc9d551f
   };
 
   return (
@@ -201,7 +173,6 @@ const OfferCarousel = () => {
         )}
 
         {/* Slides */}
-<<<<<<< HEAD
         <motion.div
           key={currentIndex}
           custom={direction}
@@ -263,70 +234,6 @@ const OfferCarousel = () => {
             </div>
           </div>
         </motion.div>
-=======
-        {offers.map((offer, index) => (
-          <motion.div
-            key={`${offer.id}-${index}`}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: index === currentIndex ? 1 : 0,
-              transition: { duration: 0.5 }
-            }}
-            className="absolute inset-0"
-          >
-            <img
-              src={offer.image}
-              alt={offer.title}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.src = '/images/promo-placeholder.jpg';
-                e.target.className = 'w-full h-full object-cover';
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-center justify-center">
-              <div className="text-white max-w-4xl mx-auto text-center px-6">
-                <motion.h3 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg"
-                  initial={{ y: 20 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  {offer.title}
-                </motion.h3>
-                <motion.p 
-                  className="text-lg md:text-xl mb-6 drop-shadow-lg max-w-2xl mx-auto"
-                  initial={{ y: 20 }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {offer.description}
-                </motion.p>
-                {offer.code && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <span className="inline-block bg-gradient-to-r from-amber-500 to-orange-600 text-white text-lg px-6 py-2 rounded-full font-medium shadow-lg">
-                      Use code: {offer.code}
-                    </span>
-                  </motion.div>
-                )}
-                {offer.validUntil && (
-                  <motion.p
-                    className="mt-4 text-sm text-orange-200"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    Valid until: {new Date(offer.validUntil).toLocaleDateString()}
-                  </motion.p>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        ))}
->>>>>>> 401dca85512bef419debcbc2a9310b4fdc9d551f
 
         {/* Navigation Dots - only show if multiple offers */}
         {offers.length > 1 && (
@@ -351,20 +258,8 @@ const OfferCarousel = () => {
           <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/20">
             <motion.div 
               className="h-full bg-gradient-to-r from-amber-500 to-orange-600"
-<<<<<<< HEAD
               style={{ width: `${progress * 100}%` }}
               transition={{ ease: 'linear' }}
-=======
-              initial={{ width: 0 }}
-              animate={{
-                width: isHovered ? '100%' : '0%',
-                transition: { 
-                  duration: isHovered ? 0 : 3,
-                  ease: "linear"
-                }
-              }}
-              key={currentIndex}
->>>>>>> 401dca85512bef419debcbc2a9310b4fdc9d551f
             />
           </div>
         )}
